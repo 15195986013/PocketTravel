@@ -1,0 +1,95 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+>
+
+    <!-- 引入属性文件-->
+    <context:property-placeholder location="classpath:configs/jdbc.properties"/>
+
+    <!--<bean id="propertyConfigurer"-->
+    <!--class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+    <!--<property name="location" value="classpath:configs/jdbc.properties" />-->
+    <!--</bean>-->
+
+
+    <!--<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+    <!--<property name="locations">-->
+    <!--<list>-->
+    <!--<value>classpath*:configs/jdbc.properties</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
+
+
+    <!-- 配置数据源 -->
+    <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <property name="initialSize" value="${initialSize}"/>
+        <property name="maxActive" value="${maxActive}"/>
+        <property name="minIdle" value="${minIdle}"/>
+        <property name="maxWait" value="${maxWait}"/>
+        <property name="validationQuery" value="${validationQuery}"/>
+        <property name="testOnBorrow" value="${testOnBorrow}"/>
+        <property name="testOnReturn" value="${testOnReturn}"/>
+        <property name="testWhileIdle" value="${testWhileIdle}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"/>
+        <property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}"/>
+        <property name="removeAbandoned" value="${removeAbandoned}"/>
+        <property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}"/>
+        <property name="logAbandoned" value="${logAbandoned}"/>
+        <property name="filters" value="${filters}"/>
+    </bean>
+
+    <!-- myBatis文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations">
+            <list>
+                <value>classpath*:mapper/*Mapper.xml</value>
+            </list>
+        </property>
+        <property name="configurationProperties">
+            <props>
+                <!-- mapUnderscoreToCamelCase属性将表中列名的下划线映射为JavaBean属性的驼峰式命名，默认为false -->
+                <prop key="mapUnderscoreToCamelCase">true</prop>
+            </props>
+        </property>
+
+        <property name="typeAliasesPackage" value="com.njbd.pt.model"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.njbd.pt.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 注解方式配置事物 -->
+    <!--<tx:annotation-driven transaction-manager="transactionManager" />-->
+
+    <!-- 拦截器方式配置事物 -->
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="modify*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="find*" propagation="SUPPORTS"/>
+            <tx:method name="query" propagation="SUPPORTS"/>
+            <tx:method name="query*" propagation="SUPPORTS"/>
+            <tx:method name="search*" propagation="SUPPORTS"/>
+            <tx:method name="*" propagation="SUPPORTS"/>
+        </tx:attributes>
+    </tx:advice>
+
+</beans>

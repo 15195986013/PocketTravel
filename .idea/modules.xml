@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/PocketTravel.iml" filepath="$PROJECT_DIR$/PocketTravel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pt-api/pt-api.iml" filepath="$PROJECT_DIR$/pt-api/pt-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pt-dao/pt-dao.iml" filepath="$PROJECT_DIR$/pt-dao/pt-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pt-utils/pt-utils.iml" filepath="$PROJECT_DIR$/pt-utils/pt-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pt-web/pt-web.iml" filepath="$PROJECT_DIR$/pt-web/pt-web.iml" />
+    </modules>
+  </component>
+</project>

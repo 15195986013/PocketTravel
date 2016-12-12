@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njbd.pt.dao.PermissionAssigmentMapper">
+    <resultMap id="BaseResultMap" type="com.njbd.pt.model.PermissionAssigment">
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="resource_id" property="resourceId" jdbcType="VARCHAR"/>
+        <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id,resource_id,role_id,create_time
+  </sql>
+
+
+    <insert id="insert" parameterType="com.njbd.pt.model.PermissionAssigment">
+    insert into t_permission_assigment (id, resource_id, role_id, 
+      create_time)
+    values (#{id,jdbcType=VARCHAR}, #{resourceId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.njbd.pt.model.PermissionAssigment">
+        insert into t_permission_assigment
+
+
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="resourceId != null">
+                resource_id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="resourceId != null">
+                #{resourceId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_permission_assigment
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+
+    <select id="selectByPage" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_permission_assigment WHERE 1=1
+        <if test="roleId != null">
+            AND role_id = #{roleId}
+        </if>
+        <if test="resourceId">
+            AND resource_id = #{resourceId}
+        </if>
+        <if test="start != null">
+            LIMIT #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER};
+        </if>
+    </select>
+
+
+</mapper>

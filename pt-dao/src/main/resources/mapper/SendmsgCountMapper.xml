@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njbd.pt.dao.SendmsgCountMapper">
+
+    <select id="selectById" parameterType="String" resultType="com.njbd.pt.model.SendmsgCount">
+     SELECT * FROM t_sendmsgcount where id = #{id}
+    </select>
+
+    <select id="selectByPhone" parameterType="String" resultType="com.njbd.pt.model.SendmsgCount">
+        SELECT * FROM t_sendmsgcount where phone = #{phone}
+    </select>
+
+    <select id="selectByPage" parameterType="HashMap" resultType="com.njbd.pt.model.SendmsgCount">
+        <![CDATA[ SELECT * FROM t_sendmsgcount where 1=1]]>
+        <if test="userid != null">
+            and userid = #{userid}
+        </if>
+        <if test="phone != null">
+            and phone = #{phone}
+        </if>
+        <if test="totalnum != null">
+            and totalnum = #{totalnum}
+        </if>
+        <if test="createtime != null">
+            and createtime LIKE #{createtime}
+        </if>
+        <if test="index != null and size != null">
+            LIMIT #{index},#{size}
+        </if>
+    </select>
+
+
+    <select id="selectServerByPage" parameterType="HashMap" resultType="java.util.HashMap">
+        <![CDATA[ SELECT * FROM t_sendmsgcount  where 1=1]]>
+        <if test="userid != null">
+            and userid = #{userid}
+        </if>
+        <if test="phone != null">
+            and phone LIKE #{phone}
+        </if>
+        <if test="totalnum != null">
+            and totalnum = #{totalnum}
+        </if>
+        <if test="createtime != null">
+            and createtime LIKE #{createtime}
+        </if>
+        <if test="start != null and end != null">
+            LIMIT #{start},#{end}
+        </if>
+    </select>
+
+    <select id="selectServerByPageCount" parameterType="HashMap" resultType="Integer">
+        <![CDATA[ SELECT COUNT(*) FROM t_sendmsgcount  where 1=1]]>
+        <if test="userid != null">
+            and userid = #{userid}
+        </if>
+        <if test="phone != null">
+            and phone LIKE #{phone}
+        </if>
+        <if test="totalnum != null">
+            and totalnum = #{totalnum}
+        </if>
+        <if test="createtime != null">
+            and createtime LIKE #{createtime}
+        </if>
+    </select>
+
+
+    <update id="updateMsgCountByID" parameterType="com.njbd.pt.model.SendmsgCount">
+        update t_sendmsgcount
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userid != null">
+                userid = #{userid},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="totalnum != null">
+                totalnum = #{totalnum},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+
+    <delete id="deleteMsgCountByID" parameterType="String">
+    delete from t_sendmsgcount where id = #{id}
+  </delete>
+
+    <insert id="insertSelective" parameterType="com.njbd.pt.model.SendmsgCount">
+        insert into t_sendmsgcount
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userid != null">
+                userid,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="totalnum != null">
+                totalnum,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userid != null">
+                #{userid,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="totalnum != null">
+                #{totalnum,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+</mapper>

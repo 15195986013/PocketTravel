@@ -1,0 +1,18 @@
+h1 {
+    font-size: 55px;
+    letter-spacing: 12px;
+    word-spacing: 6px;
+    margin-bottom: 30px;
+    color: rgba(67, 233, 221, 0.45);
+    text-shadow: 2px 2px 2px #6b6b6b,
+    6px 6px 6px rgba(67, 233, 221, 0.2),
+    8px 8px 8px rgba(60, 204, 192, 0.59),
+    12px 12px 12px rgba(156, 221, 233, 0.85);
+}
+h1:hover {
+    color: rgba(4, 5, 5, 0.56);
+    text-shadow: 2px 2px 2px #6b6b6b,
+    6px 6px 6px #464646,
+    8px 8px 8px #617b7b,
+    12px 12px 12px #040505;
+}

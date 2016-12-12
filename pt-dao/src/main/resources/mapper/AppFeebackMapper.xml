@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njbd.pt.dao.AppFeebackMapper">
+    <resultMap id="BaseResultMap" type="com.njbd.pt.model.AppFeeback">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="client_type" property="clientType" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_id, content, client_type, create_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_app_feeback
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_app_feeback
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.njbd.pt.model.AppFeeback">
+    insert into t_app_feeback (id, user_id, content, 
+      client_type, create_time)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{clientType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.njbd.pt.model.AppFeeback">
+        insert into t_app_feeback
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="clientType != null">
+                client_type,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="clientType != null">
+                #{clientType,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.njbd.pt.model.AppFeeback">
+        update t_app_feeback
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="clientType != null">
+                client_type = #{clientType,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.njbd.pt.model.AppFeeback">
+    update t_app_feeback
+    set user_id = #{userId,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      client_type = #{clientType,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+    <!--分页查询查询-->
+    <select id="selectByPage" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_app_feeback WHERE 1=1
+        <if test="userId!=null and userId !='' ">
+            AND user_id=#{userId,jdbcType=VARCHAR}
+        </if>
+        <if test="content !=null and content!=''">
+            AND content LIKE #{content,jdbcType=VARCHAR}
+        </if>
+
+        <if test="start != null">
+            LIMIT #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER};
+        </if>
+    </select>
+
+
+    <select id="selectFeedBacks" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+        SELECT
+        ui.nickName AS nickName,
+        ui.phone AS phone,
+        af.client_type AS clientType,
+        af.id AS feedBackId,
+        af.content AS content,
+        af.create_time AS createTime,
+        af.user_id AS userId
+        FROM t_userinfo AS ui RIGHT JOIN t_app_feeback AS af ON ui.user_id=af.user_id
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="content!= null ">
+                AND af.content LIKE #{content,jdbcType=VARCHAR}
+            </if>
+            <if test="clientType!='-1'">
+                AND af.client_type = #{clientType,jdbcType=INTEGER}
+            </if>
+            <if test="nickName!=null">
+                AND ui.nickName LIKE #{nickName,jdbcType=VARCHAR}
+            </if>
+
+        </trim>
+        <if test="start != null">
+            LIMIT #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER};
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njbd.pt.dao.PostMapper">
+    <resultMap id="BaseResultMap" type="com.njbd.pt.model.Post">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="start_postion" property="startPostion" jdbcType="VARCHAR"/>
+        <result column="end_postion" property="endPostion" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="pub_date" property="pubDate" jdbcType="VARCHAR"/>
+        <result column="appraisal" property="appraisal" jdbcType="REAL"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="start_lon" property="startLon" jdbcType="DOUBLE"/>
+        <result column="start_lat" property="startLat" jdbcType="DOUBLE"/>
+        <result column="end_lon" property="endLon" jdbcType="DOUBLE"/>
+        <result column="end_lat" property="endLat" jdbcType="DOUBLE"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_id, start_postion, end_postion, state, delete_flag, pub_date, appraisal, 
+    create_time, update_time, start_lon, start_lat, end_lon, end_lat,`type`
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_post
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_post
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.njbd.pt.model.Post">
+    insert into t_post (id, user_id, start_postion, 
+      end_postion, state, delete_flag,  pub_date,
+      appraisal, create_time, update_time,
+      start_lon, start_lat, end_lon, end_lat,`type`)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{startPostion,jdbcType=VARCHAR}, 
+      #{endPostion,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{deleteFlag,jdbcType=INTEGER}, 
+      #{pubDate,jdbcType=VARCHAR}, #{appraisal,jdbcType=REAL}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP},#{startLon,jdbcType=DOUBLE},#{startLat,jdbcType=DOUBLE},
+      #{endLon,jdbcType=DOUBLE},#{endLat,jdbcType=DOUBLE},#{type,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.njbd.pt.model.Post">
+        insert into t_post
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="startPostion != null">
+                start_postion,
+            </if>
+            <if test="endPostion != null">
+                end_postion,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="pubDate != null">
+                pub_date,
+            </if>
+            <if test="appraisal != null">
+                appraisal,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="startLon != null">
+                start_lon,
+            </if>
+            <if test="startLat != null">
+                start_lat,
+            </if>
+            <if test="endLon != null">
+                end_lon,
+            </if>
+            <if test="endLat != null">
+                end_lat,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="startPostion != null">
+                #{startPostion,jdbcType=VARCHAR},
+            </if>
+            <if test="endPostion != null">
+                #{endPostion,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="pubDate != null">
+                #{pubDate,jdbcType=VARCHAR},
+            </if>
+            <if test="appraisal != null">
+                #{appraisal,jdbcType=REAL},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="startLon != null">
+                #{startLon,jdbcType=DOUBLE},
+            </if>
+            <if test="startLat != null">
+                #{startLat,jdbcType=DOUBLE},
+            </if>
+            <if test="endLon != null">
+                #{endLon,jdbcType=DOUBLE},
+            </if>
+            <if test="endLat != null">
+                #{endLat,jdbcType=DOUBLE},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.njbd.pt.model.Post">
+        update t_post
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="startPostion != null">
+                start_postion = #{startPostion,jdbcType=VARCHAR},
+            </if>
+            <if test="endPostion != null">
+                end_postion = #{endPostion,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="pubDate != null">
+                pub_date = #{pubDate,jdbcType=VARCHAR},
+            </if>
+            <if test="appraisal != null">
+                appraisal = #{appraisal,jdbcType=REAL},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="startLon != null">
+                start_lon = #{startLon,jdbcType=DOUBLE},
+            </if>
+            <if test="startLat != null">
+                start_lat = #{startLat,jdbcType=DOUBLE},
+            </if>
+            <if test="endLon != null">
+                end_lon = #{endLon,jdbcType=DOUBLE},
+            </if>
+            <if test="endLat != null">
+                end_lat = #{endLat,jdbcType=DOUBLE},
+            </if>
+            <if test="type != null">
+                `type`= #{type,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.njbd.pt.model.Post">
+    update t_post
+    set user_id = #{userId,jdbcType=VARCHAR},
+      start_postion = #{startPostion,jdbcType=VARCHAR},
+      end_postion = #{endPostion,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      pub_date = #{pubDate,jdbcType=VARCHAR},
+      appraisal = #{appraisal,jdbcType=REAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      start_lon = #{startLon,jdbcType=DOUBLE},
+      start_lat = #{startLat,jdbcType=DOUBLE},
+      end_lon = #{endLon,jdbcType=DOUBLE},
+      end_lat = #{endLat,jdbcType=DOUBLE},
+      `type`= #{type,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+    <!--分页查询查询-->
+    <select id="selectByPage" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_post WHERE 1=1
+
+        <if test="time!=null and time!=''">
+            AND (create_time &lt; #{time,jdbcType=VARCHAR} OR create_time = #{time,jdbcType=VARCHAR} )
+        </if>
+        <if test="start != null">
+            LIMIT #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER};
+        </if>
+    </select>
+
+
+</mapper>

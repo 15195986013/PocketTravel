@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njbd.pt.dao.VersionMapper" >
+  <resultMap id="BaseResultMap" type="com.njbd.pt.model.Version" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="REAL" />
+    <result column="minimum_version" property="minimumVersion" jdbcType="REAL" />
+    <result column="client_type" property="clientType" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="version_name" property="versionName" jdbcType="VARCHAR" />
+    <result column="share_url" property="shareUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, version, minimum_version, client_type, content, url, create_time, version_name, share_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_version
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_version
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.njbd.pt.model.Version" >
+    insert into t_version (id, version, minimum_version, 
+      client_type, content, url, 
+      create_time, version_name,share_url)
+    values (#{id,jdbcType=VARCHAR}, #{version,jdbcType=REAL}, #{minimumVersion,jdbcType=REAL}, 
+      #{clientType,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{versionName,jdbcType=VARCHAR}, #{shareUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.njbd.pt.model.Version" >
+    insert into t_version
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="minimumVersion != null" >
+        minimum_version,
+      </if>
+      <if test="clientType != null" >
+        client_type,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="versionName != null" >
+        version_name,
+      </if>
+      <if test="shareUrl != null" >
+        share_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=REAL},
+      </if>
+      <if test="minimumVersion != null" >
+        #{minimumVersion,jdbcType=REAL},
+      </if>
+      <if test="clientType != null" >
+        #{clientType,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="versionName != null" >
+        #{versionName,jdbcType=VARCHAR},
+      </if>
+      <if test="shareUrl != null" >
+        #{shareUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.njbd.pt.model.Version" >
+    update t_version
+    <set >
+      <if test="version != null" >
+        version = #{version,jdbcType=REAL},
+      </if>
+      <if test="minimumVersion != null" >
+        minimum_version = #{minimumVersion,jdbcType=REAL},
+      </if>
+      <if test="clientType != null" >
+        client_type = #{clientType,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="versionName != null" >
+        version_name = #{versionName,jdbcType=VARCHAR},
+      </if>
+      <if test="shareUrl != null" >
+        share_url=#{shareUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.njbd.pt.model.Version" >
+    update t_version
+    set version = #{version,jdbcType=REAL},
+      minimum_version = #{minimumVersion,jdbcType=REAL},
+      client_type = #{clientType,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      version_name = #{versionName,jdbcType=VARCHAR},
+      share_url=#{shareUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+
+
+  <!-- 分页查询-->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select
+    <include refid="Base_Column_List" />
+    from t_version WHERE 1=1
+    <if test="id">
+      AND id = #{id}
+    </if>
+
+    <if test="versionName!=null and versionName!=''">
+      AND version_name LIKE #{versionName,jdbcType=VARCHAR}
+    </if>
+    <if test="content!=null and content!=''">
+      AND content LIKE #{content,jdbcType=VARCHAR}
+    </if>
+
+    <if test="url != null">
+      AND url = #{url}
+    </if>
+
+    <if test="true">
+      ORDER BY  create_time ASC
+    </if>
+    <if test="start != null">
+      LIMIT #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER};
+    </if>
+  </select>
+
+
+
+</mapper>

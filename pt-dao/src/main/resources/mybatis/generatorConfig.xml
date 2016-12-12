@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry
+            location="D:\Work\WorkOfSoft\repository\mysql\mysql-connector-java\5.1.26\mysql-connector-java-5.1.26.jar"/>
+    <context id="my" targetRuntime="MyBatis3">
+
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/pm?characterEncoding=UTF-8" userId="root"
+                        password=""/>
+
+        <javaModelGenerator targetPackage="com.njbd.pt.model"
+                            targetProject="D:\Work\WorkOfProject\POCKET\Server\PocketTravel\dao\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="com.njbd.pt.mapper"
+                         targetProject="D:\Work\WorkOfProject\POCKET\Server\PocketTravel\dao\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.njbd.pt.dao"
+                             targetProject="D:\Work\WorkOfProject\POCKET\Server\PocketTravel\dao\src\main\java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <!--<table tableName="T_FEE_AGTBILL" domainObjectName="FeeAgentBill"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash; 开始&ndash;&gt;-->
+
+        <!--&lt;!&ndash;t_address_list&ndash;&gt;-->
+        <!--<table tableName="t_address_list" domainObjectName="AddressList"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_address_list_notes&ndash;&gt;-->
+        <!--<table tableName="t_address_list_notes" domainObjectName="AddressListNotes"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_admin&ndash;&gt;-->
+        <!--<table tableName="t_admin" domainObjectName="Admin"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_app_feeback&ndash;&gt;-->
+        <!--<table tableName="t_app_feeback" domainObjectName="AppFeeback"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_called_record&ndash;&gt;-->
+        <!--<table tableName="t_called_record" domainObjectName="CalledRecord"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_called_record_note&ndash;&gt;-->
+        <!--<table tableName="t_called_record_note" domainObjectName="CalledRecordNote"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_city&ndash;&gt;-->
+        <!--<table tableName="t_city" domainObjectName="City"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_company&ndash;&gt;-->
+        <!--<table tableName="t_company" domainObjectName="Company"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_dept&ndash;&gt;-->
+        <!--<table tableName="t_dept" domainObjectName="Dept"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_goods&ndash;&gt;-->
+        <!--<table tableName="t_goods" domainObjectName="Goods"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_message&ndash;&gt;-->
+        <!--<table tableName="t_message" domainObjectName="Message"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_order&ndash;&gt;-->
+        <!--<table tableName="t_order" domainObjectName="Order"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_permission_assigment&ndash;&gt;-->
+        <!--<table tableName="t_permission_assigment" domainObjectName="PermissionAssigment"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_power_record&ndash;&gt;-->
+        <!--<table tableName="t_power_record" domainObjectName="PowerRecord"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_power_record_note&ndash;&gt;-->
+        <!--<table tableName="t_power_record_note" domainObjectName="PowerRecordNote"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_resource&ndash;&gt;-->
+        <!--<table tableName="t_resource" domainObjectName="Resource"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+
+        <!--&lt;!&ndash;t_role&ndash;&gt;-->
+        <!--<table tableName="t_role" domainObjectName="Role"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_role_assigment&ndash;&gt;-->
+        <!--<table tableName="t_role_assigment" domainObjectName="RoleAssigment"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_sound_record&ndash;&gt;-->
+        <!--<table tableName="t_sound_record" domainObjectName="SoundRecord"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_systemdaily&ndash;&gt;-->
+        <!--<table tableName="t_systemdaily" domainObjectName="SystemDaily"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--&lt;!&ndash;t_user&ndash;&gt;-->
+        <!--<table tableName="t_user" domainObjectName="User"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+
+        <!--&lt;!&ndash;t_userinfo&ndash;&gt;-->
+        <!--<table tableName="t_userinfo" domainObjectName="UserInfo"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+
+        <!--&lt;!&ndash;t_userpaper&ndash;&gt;-->
+        <!--<table tableName="t_userpaper" domainObjectName="UserPaper"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+
+        <!--&lt;!&ndash;t_version&ndash;&gt;-->
+        <!--<table tableName="t_version" domainObjectName="Version"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+
+        <!--&lt;!&ndash;t_vip&ndash;&gt;-->
+        <!--<table tableName="t_vip" domainObjectName="Vip"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+
+        <!--&lt;!&ndash;t_vip_type&ndash;&gt;-->
+        <!--<table tableName="t_vip_type" domainObjectName="VipType"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+
+
+        <!--&lt;!&ndash;结束&ndash;&gt;-->
+        <!--<table tableName="CTAS_FEE_BASE" domainObjectName="FeeBase"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<columnRenamingRule searchString="^D_"-->
+                                <!--replaceString=""/>-->
+        <!--</table>-->
+    </context>
+</generatorConfiguration>

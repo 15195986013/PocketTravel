@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njbd.pt.dao.SendmsgMapper">
+    <resultMap id="BaseResultMap" type="com.njbd.pt.model.Sendmsg">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, content, phone, createtime,type
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_sendmsg
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="searchSendmsgList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_sendmsg ORDER BY createtime DESC
+    </select>
+
+
+    <select id="searchSendmsgListByPage" parameterType="HashMap" resultType="com.njbd.pt.model.Sendmsg">
+        <![CDATA[ SELECT * FROM t_sendmsg where 1=1]]>
+        <if test="content != null">
+            and content = #{content}
+        </if>
+        <if test="type != null">
+            and type = #{type}
+        </if>
+        <if test="phone != null">
+            and phone = #{phone}
+        </if>
+        ORDER BY createtime DESC
+        <if test="index != null and size != null">
+            LIMIT #{index},#{size}
+        </if>
+    </select>
+
+    <select id="searchSendmsgListByPageCount" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+        <![CDATA[ SELECT COUNT(id) FROM t_sendmsg where 1=1]]>
+        <if test="content != null">
+            and content = #{content}
+        </if>
+        <if test="phone != null">
+            and phone = #{phone}
+        </if>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_sendmsg
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insertSelective" parameterType="com.njbd.pt.model.Sendmsg">
+        insert into t_sendmsg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.njbd.pt.model.Sendmsg">
+        update t_sendmsg
+        <set>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>
